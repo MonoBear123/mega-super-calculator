@@ -3,7 +3,7 @@ module culc
 go 1.22.1
 
 require (
-	github.com/MonoBear123/protoculc v0.13.0
+	github.com/MonoBear123/protoculc v0.15.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	github.com/ilyakaznacheev/cleanenv v1.5.0

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="block">
+        <button id="calc" class="menu-button">Калькулятор</button>
+        <button id="status" class="menu-button" onclick="GetStatus()">Статусы</button>
+        <button id="history" class="menu-button"  onclick="GetHistory()" >История</button>
+        <button id="config" class="menu-button">Конфиг</button>
+    </div>
+    <form class="Calculator" id="сalc-form" style="display: none;" target="_self" >
+        <section class="title-calc">
+            <h1>Калькулятор</h1>
+        </section>
+        <section class="input-clalc">
+            <label for="expression">Выражение</label>
+            <input type="expression" name="expression" id="expression">
+        </section>
+        <section class="submit-calc">
+            <button class="calcinput" type="button" onclick="submitExpression()">Отправить</button>
+        </section>
+    </form>
+    <form class="Calculator" id="status-form" style="display: none;" target="_self" >
+        <section class="title-calc">
+            <h2>Состояние клиентов</h2>
+            <button class="add-client-button" onclick="openModal()">Добавить клиента</button>
+            
+        </section>
+        <div id="status-container"></div>
+        <div id="modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Добавить клиента</h2>
+              <form id="add-client-form">
+                <label for="numberOfGoroutines">Количество горутин:</label>
+                <input type="number" id="numberOfGoroutines" name="numberOfGoroutines" required>
+                <button class="add-client-button" onclick="addClient()">Отправить</button>
+              </form>
+            </div>
+          </div>
+    </form>
+    
+    <form class="Calculator" id="history-form" style="display: none;" target="_self" >
+        <section class="title-calc">
+            <h2>История</h2>
+        </section>
+        <div id="history-container"></div>
+    </form>
+    <form class="Calculator" id="config-form" style="display: none;" target="_self" >
+        <section class="title-calc">
+            <h1>Конфиг</h1>
+        </section>
+        <section class="input-config">
+            <ul>
+                <li>
+                    <label for="sum">Сумма</label>
+                    <input class="inculc" name="sum" id="sum">
+                </li>
+                <li>
+                    <label for="min">Разность</label>
+                    <input type="min" name="min" id="min">
+                </li>
+                <li>
+                    <label for="mult">Произведение</label>
+                    <input type="mult" name="mult" id="mult">
+                </li>
+                <li>
+                    <label for="div">Деление</label>
+                    <input type="div" name="div" id="div">
+                </li>
+                <li>
+                    <label for="exp">Возведение в степень</label>
+                    <input type="exp" name="exp" id="exp">
+                </li>
+            </ul>
+        </section>
+        
+        <section class="submit-calc">
+            <button class="calcinput" type="button" onclick="SetConfig()">Отправить</button>
+        </section>
+    </form>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const calcButton = document.getElementById("calc");
+            const statusButton = document.getElementById("status");
+            const historyButton = document.getElementById("history");
+            const configButton = document.getElementById("config");
+
+            const calcForm = document.getElementById("сalc-form");
+            const statusForm = document.getElementById("status-form");
+            const historyForm = document.getElementById("history-form");
+            const configForm = document.getElementById("config-form");
+
+            calcButton.addEventListener("click", function() {
+                calcForm.style.display = "block";
+                statusForm.style.display = "none";
+                historyForm.style.display = "none";
+                configForm.style.display = "none";
+            });
+
+            statusButton.addEventListener("click", function() {
+                calcForm.style.display = "none";
+                statusForm.style.display = "block";
+                historyForm.style.display = "none";
+                configForm.style.display = "none";
+            });
+
+            historyButton.addEventListener("click", function() {
+                calcForm.style.display = "none";
+                statusForm.style.display = "none";
+                historyForm.style.display = "block";
+                configForm.style.display = "none";
+            });
+
+            configButton.addEventListener("click", function() {
+                calcForm.style.display = "none";
+                statusForm.style.display = "none";
+                historyForm.style.display = "none";
+                configForm.style.display = "block";
+            });
+        });
+        
+    </script>
+</body>
+</html>

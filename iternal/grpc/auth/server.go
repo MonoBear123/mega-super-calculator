@@ -178,10 +178,12 @@ func isNumeric(s string) bool {
 }
 func (s *ServerAPI) NewClient(ctx context.Context, req *culcv1.ClientReq) (*culcv1.ClientRes, error) {
 	rand.Seed(time.Now().UnixNano())
-
+	if req.GetCountworker() == 0 {
+		return nil, fmt.Errorf("количество горутин==0")
+	}
 	randomNumber := rand.Intn(100)
 	s.CalcServ.AddClient(fmt.Sprintf("%d", randomNumber), int(req.GetCountworker()))
-	return nil, nil
+	return &culcv1.ClientRes{Res: fmt.Sprint(randomNumber)}, nil
 
 }
 func (s *ServerAPI) StreamServerStatuses(ctx context.Context, req *culcv1.StreamServerStatusesRequest) (*culcv1.StreamServerStatusesResponse, error) {
@@ -248,6 +250,7 @@ func (s *ServerAPI) UpdateConfig(ctx context.Context, in *culcv1.ConfigReq) (*cu
 	NewCFG.MultiP = time.Duration(in.GetMultP())
 	NewCFG.Plus = time.Duration(in.GetPlus())
 	s.CalcServ.UpdateTime(NewCFG)
+	fmt.Println(NewCFG.Division)
 	return &culcv1.ConfigRes{}, nil
 }
 func (s *ServerAPI) ChekShutDownEx() {

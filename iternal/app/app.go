@@ -43,12 +43,23 @@ func StartHTTP(porthttp string, portgrpc string, ctx context.Context) error {
 		return err
 	}
 
-	http.Handle("/", http.FileServer(http.Dir(".")))
-
 	go func() {
 		server := &http.Server{
-			Addr:    ":" + porthttp,
-			Handler: mux,
+			Addr: ":" + porthttp,
+			Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("Access-Control-Allow-Origin", "*")
+				if r.Method == http.MethodOptions {
+					// Устанавливаем заголовки CORS
+
+					w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+					w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+					w.WriteHeader(http.StatusOK)
+					return
+				}
+
+				// Обработка других запросов
+				mux.ServeHTTP(w, r)
+			}),
 		}
 
 		if err := server.ListenAndServe(); err != nil {
