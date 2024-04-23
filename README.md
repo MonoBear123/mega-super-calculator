@@ -44,7 +44,7 @@ docker compose up
 ```
 
 # Заходим на  localhost:8082
-  
+  (не знаю почему, но дабовление клиента в firefox не работает)
  
 
 # Тесты <a name="Test"></a> 
