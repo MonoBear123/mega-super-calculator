@@ -192,6 +192,10 @@ input {
   }
   
   .close {
+    position: absolute;
+    top: -15px;
+    right: -2px;
+    cursor: pointer;
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -200,7 +204,7 @@ input {
   
   .close:hover,
   .close:focus {
-    color: #000;
+    color: #970a0a;
     text-decoration: none;
     cursor: pointer;
   }

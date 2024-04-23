@@ -178,11 +178,13 @@ func isNumeric(s string) bool {
 }
 func (s *ServerAPI) NewClient(ctx context.Context, req *culcv1.ClientReq) (*culcv1.ClientRes, error) {
 	rand.Seed(time.Now().UnixNano())
+
 	if req.GetCountworker() == 0 {
 		return nil, fmt.Errorf("количество горутин==0")
 	}
 	randomNumber := rand.Intn(100)
 	s.CalcServ.AddClient(fmt.Sprintf("%d", randomNumber), int(req.GetCountworker()))
+
 	return &culcv1.ClientRes{Res: fmt.Sprint(randomNumber)}, nil
 
 }

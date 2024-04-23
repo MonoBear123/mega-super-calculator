@@ -20,7 +20,12 @@ function submitExpression() {
     })
     .then(response => {
         if (!response.ok) {
+            
+
+     
+        expressionInput.value = "";
             throw new Error('Network response was not ok');
+            
         }
         return response.json();
     })
@@ -36,10 +41,17 @@ function submitExpression() {
         expressionInput.value = "";
 
         
-        alert('Успешно посчиталось');
+    
     })
     .catch(error => {
         console.error('Ошибка подсчета:', error);
+        const resultElement = document.createElement("div");
+        const calcForm = document.getElementById("сalc-form");
+        resultElement.textContent = `${expression} = ${'ошибка в подсчетах'}`;
+        calcForm.appendChild(resultElement);
+
+     
+        expressionInput.value = "";
     });
 }
 
@@ -200,10 +212,15 @@ function SetConfig(){
 
 function openModal() {
     document.getElementById('modal').style.display = 'block';
-} 
+    // Добавляем обработчик события клика на весь документ
+  
+}
+
 function closeModal() {
     document.getElementById('modal').style.display = 'none';
-} 
+   
+}
+
 
 function addClient() {
     const countworkerInput = document.getElementById('numberOfGoroutines').value;
@@ -229,12 +246,13 @@ function addClient() {
     .then(data => {
         console.log('Успешное добавление клиента:', data);
         alert('Успешное добавление клиента');
-        closeModal() 
+       
     })
     .catch(error => {
         console.error('Ошибка добавления клиента:', error);
         alert('Ошибка добавления клиента');
-    });
+    }
+);
 
     // Очищаем значение поля ввода
    
